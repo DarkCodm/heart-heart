@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Heart App</title>
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #1f0033, #3b0d5f);
+        color: white;
+      }
+
+      .card {
+        padding: 2rem;
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.12);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(14px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .heart-button {
+        position: relative;
+        width: 280px;
+        height: 280px;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        padding: 0;
+      }
+
+      .heart {
+        position: absolute;
+        inset: 0;
+        margin: auto;
+        width: 180px;
+        height: 180px;
+        background: #ff4d6d;
+        transform: rotate(45deg);
+        transition: transform 0.6s ease, width 0.6s ease, height 0.6s ease, border-radius 0.6s ease, box-shadow 0.6s ease;
+        box-shadow: 0 12px 28px rgba(255, 77, 109, 0.35);
+      }
+
+      .heart::before,
+      .heart::after {
+        content: "";
+        position: absolute;
+        width: 180px;
+        height: 180px;
+        background: inherit;
+        border-radius: 50%;
+      }
+
+      .heart::before {
+        left: -90px;
+        top: 0;
+      }
+
+      .heart::after {
+        left: 0;
+        top: -90px;
+      }
+
+      .heart-button.open .heart {
+        width: 220px;
+        height: 220px;
+        border-radius: 24px;
+        transform: rotate(0deg) scale(1.04);
+        box-shadow: 0 16px 34px rgba(255, 77, 109, 0.5);
+      }
+
+      .heart-button.open .heart::before,
+      .heart-button.open .heart::after {
+        opacity: 0;
+      }
+
+      .message {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        font-size: 2rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #fff;
+        opacity: 0;
+        transform: scale(0.7);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        text-shadow: 0 0 16px rgba(255, 255, 255, 0.3);
+        pointer-events: none;
+      }
+
+      .heart-button.open .message {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .hint {
+        margin-top: 1rem;
+        text-align: center;
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.8);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <button id="heartButton" class="heart-button" aria-label="Open the heart">
+        <span class="heart"></span>
+        <span class="message">I LOVE YOU</span>
+      </button>
+      <div class="hint">Click the heart</div>
+    </div>
+
+    <script>
+      const button = document.getElementById("heartButton");
+      button.addEventListener("click", () => {
+        button.classList.toggle("open");
+      });
+    </script>
+  </body>
+</html>
